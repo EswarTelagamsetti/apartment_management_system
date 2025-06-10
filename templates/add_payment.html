@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Add New Payment</h1>
+
+<form method="POST" action="{{ url_for('add_payment') }}">
+    <div class="mb-3">
+        <label for="tenant_id" class="form-label">Tenant</label>
+        <select class="form-select" id="tenant_id" name="tenant_id" required>
+            <option value="">Select a tenant</option>
+            {% for tenant in tenants %}
+            <option value="{{ tenant.tenant_id }}">{{ tenant.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="apartment_id" class="form-label">Apartment</label>
+        <select class="form-select" id="apartment_id" name="apartment_id" required>
+            <option value="">Select an apartment</option>
+            {% for apartment in apartments %}
+            <option value="{{ apartment.apartment_id }}">{{ apartment.unit_number }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input type="number" class="form-control" id="amount" name="amount" min="0" step="0.01" required>
+    </div>
+    <div class="mb-3">
+        <label for="payment_date" class="form-label">Payment Date</label>
+        <input type="date" class="form-control" id="payment_date" name="payment_date" required>
+    </div>
+    <div class="mb-3">
+        <label for="payment_method" class="form-label">Payment Method</label>
+        <select class="form-select" id="payment_method" name="payment_method" required>
+            <option value="">Select a payment method</option>
+            <option value="cash">Cash</option>
+            <option value="check">Check</option>
+            <option value="credit card">Credit Card</option>
+            <option value="bank transfer">Bank Transfer</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Payment</button>
+    <a href="{{ url_for('payments') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

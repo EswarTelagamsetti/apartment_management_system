@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Add Maintenance Request</h1>
+
+<form method="POST" action="{{ url_for('add_maintenance') }}">
+    <div class="mb-3">
+        <label for="apartment_id" class="form-label">Apartment</label>
+        <select class="form-select" id="apartment_id" name="apartment_id" required>
+            <option value="">Select an apartment</option>
+            {% for apartment in apartments %}
+            <option value="{{ apartment.apartment_id }}">{{ apartment.unit_number }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="tenant_id" class="form-label">Tenant</label>
+        <select class="form-select" id="tenant_id" name="tenant_id" required>
+            <option value="">Select a tenant</option>
+            {% for tenant in tenants %}
+            <option value="{{ tenant.tenant_id }}">{{ tenant.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="request_date" class="form-label">Request Date</label>
+        <input type="date" class="form-control" id="request_date" name="request_date" required>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status" required>
+            <option value="pending">Pending</option>
+            <option value="in progress">In Progress</option>
+            <option value="completed">Completed</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Request</button>
+    <a href="{{ url_for('maintenance') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

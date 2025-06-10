@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Add New Apartment</h1>
+
+<form method="POST" action="{{ url_for('add_apartment') }}">
+    <div class="mb-3">
+        <label for="unit_number" class="form-label">Unit Number</label>
+        <input type="text" class="form-control" id="unit_number" name="unit_number" required>
+    </div>
+    <div class="mb-3">
+        <label for="bedrooms" class="form-label">Bedrooms</label>
+        <input type="number" class="form-control" id="bedrooms" name="bedrooms" min="1" required>
+    </div>
+    <div class="mb-3">
+        <label for="bathrooms" class="form-label">Bathrooms</label>
+        <input type="number" class="form-control" id="bathrooms" name="bathrooms" min="1" step="0.5" required>
+    </div>
+    <div class="mb-3">
+        <label for="square_feet" class="form-label">Square Feet</label>
+        <input type="number" class="form-control" id="square_feet" name="square_feet" min="1" required>
+    </div>
+    <div class="mb-3">
+        <label for="monthly_rent" class="form-label">Monthly Rent</label>
+        <input type="number" class="form-control" id="monthly_rent" name="monthly_rent" min="0" step="0.01" required>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status" required>
+            <option value="vacant">Vacant</option>
+            <option value="occupied">Occupied</option>
+            <option value="maintenance">Maintenance</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Apartment</button>
+    <a href="{{ url_for('apartments') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

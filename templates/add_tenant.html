@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Add New Tenant</h1>
+
+<form method="POST" action="{{ url_for('add_tenant') }}">
+    <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="phone" name="phone" required>
+    </div>
+    <div class="mb-3">
+        <label for="move_in_date" class="form-label">Move-In Date</label>
+        <input type="date" class="form-control" id="move_in_date" name="move_in_date" required>
+    </div>
+    <div class="mb-3">
+        <label for="apartment_id" class="form-label">Apartment</label>
+        <select class="form-select" id="apartment_id" name="apartment_id" required>
+            <option value="">Select an apartment</option>
+            {% for apartment in apartments %}
+            <option value="{{ apartment.apartment_id }}">{{ apartment.unit_number }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Tenant</button>
+    <a href="{{ url_for('tenants') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
